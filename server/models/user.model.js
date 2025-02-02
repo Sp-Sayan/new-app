@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
             required: true,
             unique: true,
         },
-        fullName: {
+        userName: {
             type: String,
             required: true,
         },
@@ -20,7 +20,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             default: "",
         },
-    }
+    }, {
+    timestamps: true,
+}
 )
 
 const User = mongoose.model("User", userSchema);
