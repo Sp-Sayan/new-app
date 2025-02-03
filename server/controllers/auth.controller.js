@@ -2,6 +2,7 @@ import User from '../models/user.model.js';
 import generateToken from '../lib/utils.js';
 import bcrypt from 'bcryptjs';
 
+
 const signup = async (req, res) => {
     const { email, userName, password } = req.body;
     try {
@@ -56,7 +57,7 @@ const signup = async (req, res) => {
         }
 
     } catch (error) {
-        console.log("Error in signup: ", error);
+        res.status(400).send("Error in signup: ", error);
     }
 }
 const login = (req, res) => {
@@ -65,5 +66,6 @@ const login = (req, res) => {
 const logout = (req, res) => {
     res.send("logout Route");
 }
+
 
 export { signup, login, logout };
