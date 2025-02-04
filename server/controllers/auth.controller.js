@@ -67,7 +67,7 @@ const login = async (req, res) => {
         //check if user exists
         const validate = await User.findOne({ email })
 
-        if (validate.email !== email) {
+        if (!validate) {
             return res.status(400).json({
                 message: "User not found"
             });

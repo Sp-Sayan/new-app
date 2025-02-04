@@ -10,7 +10,9 @@ const assistant = async (req, res) => {
     }
     try {
         const chat = await getGroqChatCompletion(message, model);
-        return res.status(200).send(chat.choices[0].message.content);
+        return res.status(200).json({
+            reply: chat.choices[0].message.content
+        });
     }
     catch (error) {
         console.log("Error: ", error);
