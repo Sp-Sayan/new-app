@@ -60,11 +60,55 @@ const signup = async (req, res) => {
         res.status(400).send("Error in signup: ", error);
     }
 }
-const login = (req, res) => {
-    res.send("login Route");
+const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        //check if user exists
+        const validate = await User.findOne({ email })
+
+        if (validate.email !== email) {
+            return res.status(400).json({
+                message: "User not found"
+            });
+        }
+        //comparing password
+        const isPassCorrect = await bcrypt.compare(password, validate.password);
+
+        if (!isPassCorrect) {
+            return res.status(400).json({
+                message: "Invalid Credentials"
+            });
+        }
+
+        generateToken(validate._id, res);
+        res.status(200).json({
+            _id: validate._id,
+            userName: validate.userName,
+            email: validate.email,
+            profilePic: validate.profilePic,
+            message: "Login Successful 😍"
+        })
+    }
+
+    catch (error) {
+        console.log("Error: ", error);
+    }
+
+
 }
 const logout = (req, res) => {
-    res.send("logout Route");
+    try {
+        res.cookie("jwt", "", {
+            maxAge: 0
+        });
+        res.status(200).json({
+            message: "Logged out Successfully"
+        });
+
+    } catch (error) {
+        console.log("Error: ", error);
+    }
 }
 
 
