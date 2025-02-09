@@ -9,7 +9,7 @@ const Home = () => {
     size: "text-5xl",
   };
   return (
-    <div className="home-container h-full  w-full  flex flex-col absolute dark:bg-grid-[#ffffff]/[0.2] bg-grid-black/[0.2] ">
+    <div className="home-container h-full  w-full  flex flex-col absolute dark:bg-grid-[#e11d48]/[0.3] bg-grid-[#e11d48]/[0.3] ">
       <Navbar />
       <header className="heading-container  h-2/3 w-full flex flex-col justify-center items-center ">
         <HoverBorderGradient
@@ -29,7 +29,9 @@ const Home = () => {
           />
         </div>
       </header>
-      <section className="about z-50"></section>
+      <section className="features z-50">
+
+      </section>
     </div>
   );
 };
