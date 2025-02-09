@@ -1,26 +1,31 @@
-import {React,useState,useEffect} from 'react'
-import {Switch} from './ui/switch.jsx';
+import { React, useState, useEffect } from "react";
+import { Switch } from "./ui/switch.jsx";
 const ToggleSwitch = () => {
-  
-    const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
 
-    const toggleTheme = () => {
-      setIsDarkMode(!isDarkMode);
-    };
-  
-    useEffect(() => {
-      if (isDarkMode) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    }, [isDarkMode]);
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const newTheme = !prev;
+      localStorage.setItem("theme", newTheme ? "dark" : "light");
+      return newTheme;
+    });
+  };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
 
   return (
     <span>
-      <Switch onCheckedChange={toggleTheme}></Switch>
+      <Switch checked={isDarkMode} onCheckedChange={toggleTheme}></Switch>
     </span>
-  )
-}
+  );
+};
 
 export default ToggleSwitch;
