@@ -6,6 +6,7 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 const Home = () => {
   const data = {
     sub_heading: "watch.  connect.  communicate.",
+    size: "text-5xl",
   };
   return (
     <div className="home-container h-full  w-full  flex flex-col absolute dark:bg-grid-[#ffffff]/[0.2] bg-grid-black/[0.2] ">
@@ -22,7 +23,7 @@ const Home = () => {
         <div className="heading w-fit  text-center">
           <h1 className="text-9xl text-foreground">FlixChat</h1>
           <TextGenerateEffect
-            textSize={"5xl"}
+            textSize={data.size}
             duration={1.5}
             words={data.sub_heading}
           />
