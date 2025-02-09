@@ -17,7 +17,7 @@ const Navbar = () => {
     <nav className="bg-transparent h-20 w-full flex justify-between items-center z-50 p-10 md:p-10">
       <img src={Icon} alt="flix-icon" />
 
-      <div className="menu-items w-fit mt-5 h-1/6 p-8 backdrop-blur-sm flex justify-evenly items-center rounded-[40px] dark:shadow-[1px_0px_5px_white] shadow-[2px_2px_2px_black]">
+      <div className="menu-items w-fit mt-5 h-1/6 p-8 backdrop-blur-sm flex justify-evenly items-center rounded-[40px] dark:shadow-[1px_0px_5px_hsl(var(--primary))] shadow-[2px_2px_2px_hsl(var(--primary))]">
         <NavigationMenu className="h-2/3 w-full ">
           <NavigationMenuList className="flex space-x-4 ">
             <NavigationMenuItem>

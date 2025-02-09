@@ -26,6 +26,10 @@ export const TextGenerateEffect = ({
     );
   }, [scope.current]);
 
+  useEffect(() => {
+    console.log(textSize);
+  });
+
   const renderWords = () => {
     return (
       <motion.div ref={scope}>
@@ -33,7 +37,7 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className="dark:text-foreground text-foreground opacity-0"
+              className="dark:text-foreground hover:text-primary dark:hover:text-primary text-foreground opacity-0"
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}
@@ -50,7 +54,7 @@ export const TextGenerateEffect = ({
     <div className={cn("font-bold", className)}>
       <div className="mt-4">
         <div
-          className={`dark:text-white text-black text-${textSize} leading-snug tracking-widest`}
+          className={`dark:text-white text-black ${textSize} leading-snug tracking-widest`}
         >
           {renderWords()}
         </div>
