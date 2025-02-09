@@ -4,6 +4,7 @@ import { motion, stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const TextGenerateEffect = ({
+  classes,
   textSize,
   words,
   className,
@@ -54,7 +55,7 @@ export const TextGenerateEffect = ({
     <div className={cn("font-bold", className)}>
       <div className="mt-4">
         <div
-          className={`dark:text-white text-black ${textSize} leading-snug tracking-widest`}
+          className={`dark:text-white text-black ${textSize} ${classes}  leading-snug tracking-widest`}
         >
           {renderWords()}
         </div>
