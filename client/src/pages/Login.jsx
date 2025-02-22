@@ -4,9 +4,9 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import { RetroGrid } from "@/components/magicui/retro-grid";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 
-const SignUp = () => {
+const Login = () => {
   return (
-    <div className="signup-container h-full w-full  flex flex-col  ">
+    <div className="login-container h-full w-full  flex flex-col  ">
       <RetroGrid />
       {/* <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div> */}
       <Navbar />
@@ -22,14 +22,8 @@ const SignUp = () => {
             class="p-4 flex-col text-[0.5em] gap-4  max-w-sm bg-transparent rounded-x1 w-25 text-foreground flex justify-center items-center min-h-fit"
           >
             <h1 className="text-[1.5em] mb-5 font-bold text-foreground">
-              Sign Up
+              Login
             </h1>
-
-            <input
-              type="text"
-              className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
-              placeholder="Username"
-            />
 
             <input
               type="email"
@@ -43,19 +37,14 @@ const SignUp = () => {
               placeholder="Password"
             />
 
-            <input
-              type="password"
-              className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
-              placeholder="Confirm Password"
-            />
             <p>
-              Already Have an Account?{" "}
+              New to flixchat?{" "}
               <a href="/login" className="hover:underline">
-                Sign In
+                Sign up
               </a>
             </p>
             <InteractiveHoverButton type="submit" className="group">
-              Sign Up
+              Login
             </InteractiveHoverButton>
 
             <div className="flex w-full justify-evenly ">
@@ -98,4 +87,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
