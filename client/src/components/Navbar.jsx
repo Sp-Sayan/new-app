@@ -11,13 +11,25 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "./ui/navigation-menu.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  return (
-    <nav className="bg-transparent h-20 w-full flex justify-between items-center z-50 p-10 md:p-10">
-      <img src={Icon} alt="flix-icon" />
+  const navigate = useNavigate();
 
-      <div className="menu-items w-fit mt-5 h-1/6 p-8 backdrop-blur-sm flex justify-evenly items-center rounded-[40px] dark:shadow-[1px_0px_5px_hsl(var(--primary))] shadow-[2px_2px_2px_hsl(var(--primary))]">
+  const iconClick = () => {
+    navigate("/home");
+  };
+
+  return (
+    <nav className="bg-transparent absolute h-20 w-full flex justify-between items-center z-50 p-10 md:p-10">
+      <img
+        onClick={iconClick}
+        src={Icon}
+        alt="flix-icon"
+        className="cursor-pointer"
+      />
+
+      <div className="menu-items w-fit mt-5 h-1/6 p-8 backdrop-blur-sm flex justify-evenly items-center rounded-[40px] dark:shadow-[1px_0px_5px_hsl(var(--primary))] shadow-[1px_0px_5px_hsl(var(--primary))]">
         <NavigationMenu className="h-2/3 w-full ">
           <NavigationMenuList className="flex space-x-4 ">
             <NavigationMenuItem>
@@ -30,7 +42,7 @@ const Navbar = () => {
                     <NavigationMenuLink asChild>
                       <a
                         className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/"
+                        href="/home"
                       >
                         <img src={Icon} alt="logo" className="h-6 w-6" />
                         <div className="mb-2 mt-4 text-lg font-medium">
@@ -45,7 +57,7 @@ const Navbar = () => {
                   <li className="row-span-1">
                     <a
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/"
+                      href="/login"
                     >
                       <div className="mb-2 mt-4 text-lg font-medium">Login</div>
                       <p className="text-sm leading-tight text-muted-foreground">
@@ -56,7 +68,7 @@ const Navbar = () => {
                   <li className="row-span-1">
                     <a
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/"
+                      href="/signup"
                     >
                       <div className="mb-2 mt-4 text-lg font-medium">
                         Sign Up

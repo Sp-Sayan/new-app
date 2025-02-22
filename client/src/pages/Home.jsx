@@ -2,6 +2,7 @@ import { React } from "react";
 import Navbar from "@/components/Navbar";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { RetroGrid } from "@/components/magicui/retro-grid";
 
 const Home = () => {
   const data = {
@@ -9,9 +10,32 @@ const Home = () => {
     size: "text-5xl",
   };
   return (
-    <div className="home-container h-full  w-full  flex flex-col absolute dark:bg-grid-[#e11d48]/[0.3] bg-grid-[#e11d48]/[0.3] ">
+    <div className="home-container h-full  w-full bg-transparent flex flex-col ">
+      <RetroGrid />
       <Navbar />
-      <header className="heading-container  h-2/3 w-full flex flex-col justify-center items-center ">
+      <div className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-lg bg-transparent">
+        <header className="heading-container  h-2/3 w-full flex flex-col justify-center items-center ">
+          <HoverBorderGradient
+            containerClassName="rounded-full"
+            as="button"
+            className="dark:bg-black bg-white text-foreground dark:text-foreground flex items-center space-x-2"
+          >
+            <span>Where streaming meets talking 🔥</span>
+          </HoverBorderGradient>
+
+          <div className="heading w-fit  text-center">
+            <span className="pointer-events-none text-9xl z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center  font-bold leading-none tracking-tighter text-transparent">
+              FlixChat
+            </span>
+            <TextGenerateEffect
+              textSize={data.size}
+              duration={1.5}
+              words={data.sub_heading}
+            />
+          </div>
+        </header>
+      </div>
+      {/* <header className="heading-container  h-2/3 w-full flex flex-col justify-center items-center ">
         <HoverBorderGradient
           containerClassName="rounded-full"
           as="button"
@@ -28,10 +52,8 @@ const Home = () => {
             words={data.sub_heading}
           />
         </div>
-      </header>
-      <section className="features z-50">
-
-      </section>
+      </header> */}
+      <section className="features z-50"></section>
     </div>
   );
 };
