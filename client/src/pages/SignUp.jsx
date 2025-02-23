@@ -21,25 +21,24 @@ const SignUp = () => {
             action=""
             class="p-4 flex-col text-[0.5em] gap-4  max-w-sm bg-transparent rounded-x1 w-25 text-foreground flex justify-center items-center min-h-fit"
           >
-            <h1 className="text-[1.5em] mb-5 font-bold text-foreground">
+            <h1 className="text-[1.5em] mb-5 font-bold text-foreground font-title">
               Sign Up
             </h1>
-
             <input
               type="text"
-              className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
+              className="border-b p-2 h-[40px] w-full font-body bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
               placeholder="Username"
             />
 
             <input
               type="email"
-              className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
+              className="border-b p-2 h-[40px] w-full font-body bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
               placeholder="Email"
             />
 
             <input
               type="password"
-              className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
+              className="border-b p-2 h-[40px] w-full font-body bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
               placeholder="Password"
             />
 
@@ -48,9 +47,9 @@ const SignUp = () => {
               className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
               placeholder="Confirm Password"
             />
-            <p>
+            <p className="font-body">
               Already Have an Account?{" "}
-              <a href="/login" className="hover:underline">
+              <a href="/login" className="hover:underline font-title">
                 Sign In
               </a>
             </p>
