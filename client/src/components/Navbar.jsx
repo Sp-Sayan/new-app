@@ -1,6 +1,8 @@
 import React from "react";
 import ToggleSwitch from "./ToggleSwitch.jsx";
+import { ArrowRight } from "lucide-react";
 import Icon from "../assets/react.svg";
+import NavLogo1 from "../assets/nav-logo1.webp";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -33,7 +35,7 @@ const Navbar = () => {
         <NavigationMenu className="h-2/3 w-full ">
           <NavigationMenuList className="flex space-x-4 ">
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent hover:text-primary">
+              <NavigationMenuTrigger className="bg-transparent font-title hover:text-primary">
                 Getting Started
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -41,14 +43,18 @@ const Navbar = () => {
                   <li className="row-span-2">
                     <NavigationMenuLink asChild>
                       <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        className="flex z-1 h-full w-full select-none hover:scale-90 flex-col justify-end rounded-md bg-gradient-to-bl dark:from-destructive/50 from-primary/20  dark:to-primary/60 to-destructive/80  relative p-6 no-underline outline-none focus:shadow-md transition-all duration-300 ease-in-out"
                         href="/home"
                       >
-                        <img src={Icon} alt="logo" className="h-6 w-6" />
-                        <div className="mb-2 mt-4 text-lg font-medium">
+                        <img
+                          src={Icon}
+                          alt="logo"
+                          className="h-6 w-6 relative z-10"
+                        />
+                        <div className="mb-2 mt-4 text-lg font-title  font-medium relative z-10">
                           FlixChat
                         </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
+                        <p className="text-sm leading-tight font-body text-chart-3 dark:text-muted-foreground relative z-10">
                           Watch and spend time with your closed ones💫
                         </p>
                       </a>
@@ -56,24 +62,28 @@ const Navbar = () => {
                   </li>
                   <li className="row-span-1">
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      className="group flex h-full w-full hover:scale-90 select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md transition-all duration-300 ease-in-out"
                       href="/login"
                     >
-                      <div className="mb-2 mt-4 text-lg font-medium">Login</div>
-                      <p className="text-sm leading-tight text-muted-foreground">
+                      <div className="mb-2 mt-4 font-title w-[40%] group-hover:w-[80%] transition-all duration-300 h-fit flex justify-between  text-lg font-medium">
+                        <p>Login</p>
+                        <ArrowRight className="translate-y-1" />
+                      </div>
+                      <p className="text-sm leading-tight font-body text-muted-foreground">
                         Proceed to login 🧑‍💻
                       </p>
                     </a>
                   </li>
                   <li className="row-span-1">
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      className="group flex h-full w-full select-none hover:scale-90 flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md transition-all duration-300 ease-in-out"
                       href="/signup"
                     >
-                      <div className="mb-2 mt-4 text-lg font-medium">
-                        Sign Up
+                      <div className="mb-2 mt-4 w-[60%] group-hover:w-[80%] transition-all duration-300 h-fit flex justify-between  text-lg font-medium">
+                        <p className="font-title">Sign Up</p>
+                        <ArrowRight className="translate-y-1" />
                       </div>
-                      <p className="text-sm leading-tight text-muted-foreground">
+                      <p className="text-sm leading-tight font-body text-muted-foreground">
                         Proceed to Sign Up. 🧑‍💻
                       </p>
                     </a>
@@ -83,14 +93,14 @@ const Navbar = () => {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <a href="/guest" className="hover:text-primary">
+                <a href="/guest" className="hover:text-primary font-title">
                   Guest Mode
                 </a>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <a href="/about" className="hover:text-primary">
+                <a href="/about" className="hover:text-primary font-title">
                   About
                 </a>
               </NavigationMenuLink>

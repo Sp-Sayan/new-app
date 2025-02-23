@@ -146,19 +146,19 @@ const About = () => {
       <Navbar />
       <RetroGrid />
       <div className="about-info mt-[10rem] w-full flex flex-col items-center ">
-        <div className="text-center py-10 bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text pt-10 text-7xl font-[600]">
+        <div className="text-center font-title py-10 bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text pt-10 text-7xl font-[600]">
           ABOUT US
         </div>
         <div className="my-5 about-content w-3/4 text-center">
           <TextGenerateEffect
-            classes={"font-[400]"}
+            classes="font-[400] font-body"
             words={data.about_data}
             textSize={data.about_size}
             duration={1}
           />
         </div>
       </div>
-      <span className="text-center bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text py-20 text-7xl font-[600]">
+      <span className="text-center font-title bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text py-20 text-7xl font-[600]">
         TECH STACK
       </span>
       <div className="tech-stack min-h-screen w-full flex justify-evenly z-50 "></div>
