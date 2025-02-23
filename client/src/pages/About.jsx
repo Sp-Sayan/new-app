@@ -8,7 +8,7 @@ import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
 const About = () => {
   const data = {
     about_data:
-      "This project is a fullstack web application that enables people to stay in touch with their friends and family. It allows users to update their information and manage their settings just like any other chat-app. It provides features such as Guest Mode and Streaming together.Built with cutting-edge technologies, it offers a seamless user experience and robust functionality. From intuitive interfaces to powerful backend systems, every aspect of our project is crafted to meet the highest standards of modern web development.",
+      "This project is a fullstack web application that enables people to stay in touch with their friends and family. It allows users to update their information and manage their settings just like any other chat-app. It provides features such as Guest Mode and Streaming together. Built with cutting-edge technologies, it offers a seamless user experience and robust functionality. From intuitive interfaces to powerful backend systems, every aspect of our project is crafted to meet the highest standards of modern web development.",
     about_size: "text-2xl",
   };
 
@@ -142,26 +142,36 @@ const About = () => {
   };
 
   return (
-    <div className="about-container h-full bg-transparent w-full flex flex-col">
+    <div className="about-container h-screen w-full bg-transparent  flex flex-col">
       <Navbar />
-      <RetroGrid />
+
       <div className="about-info mt-[10rem] w-full flex flex-col items-center ">
         <div className="text-center font-title py-10 bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text pt-10 text-7xl font-[600]">
           ABOUT US
         </div>
-        <div className="my-5 about-content w-3/4 text-center">
+        <div className="my-5 about-content w-3/4 text-center ">
           <TextGenerateEffect
             classes="font-[400] font-body"
             words={data.about_data}
             textSize={data.about_size}
-            duration={1}
+            duration={0.5}
           />
         </div>
       </div>
-      <span className="text-center font-title bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text py-20 text-7xl font-[600]">
-        TECH STACK
-      </span>
-      <div className="tech-stack min-h-screen w-full flex justify-evenly z-50 "></div>
+
+      <div className="tech-stack min-h-fit w-full flex flex-col items-center justify-evenly z-50  ">
+        <span className="text-center font-title bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text py-20 text-7xl font-[600]">
+          TECH STACK
+        </span>
+        <div className="my-5 about-content w-3/4 text-center ">
+          <InfiniteMovingCards
+            items={testimonials}
+            direction="right"
+            speed="slow"
+          />
+        </div>
+      </div>
+      <RetroGrid />
     </div>
   );
 };
