@@ -14,7 +14,7 @@ const Home = () => {
       <RetroGrid />
       <Navbar />
       <div className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-lg bg-transparent">
-        <header className="heading-container  h-2/3 w-full flex flex-col justify-center items-center ">
+        <header className="heading-container h-2/3 w-full flex flex-col justify-center items-center ">
           <HoverBorderGradient
             containerClassName="rounded-full"
             as="button"
