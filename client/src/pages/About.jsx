@@ -4,6 +4,7 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { RetroGrid } from "@/components/magicui/retro-grid";
 import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
+import  CardReveal  from "@/components/CardReveal";
 
 const About = () => {
   const data = {
@@ -147,7 +148,7 @@ const About = () => {
 
       <div className="about-info mt-[10rem] w-full flex flex-col items-center ">
         <div className="text-center font-title py-10 bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text pt-10 text-7xl font-[600]">
-          ABOUT US
+          PROJECT OVERVIEW
         </div>
         <div className="my-5 about-content w-3/4 text-center ">
           <TextGenerateEffect
@@ -171,8 +172,20 @@ const About = () => {
           />
         </div>
       </div>
+
+      <div className="about-info mt-[10rem] w-full flex flex-col items-center ">
+      <span className="text-center font-title bg-gradient-to-b from-foreground from-30%  to-background to-90% text-transparent bg-clip-text py-20 text-7xl font-[600]">
+          ABOUT US
+          
+        </span>
+      </div >
+      <div className="w-full">
+        <CardReveal/>
+      </div>
       <RetroGrid />
     </div>
+  
+    
   );
 };
 
