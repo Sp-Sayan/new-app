@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-transparent absolute h-20 w-full flex justify-between items-center z-50 p-10 md:p-10">
+    <nav className=" bg-transparent fixed h-[7rem] w-full backdrop-blur-3xl flex justify-between items-center z-50 p-10 md:p-10">
       <img
         onClick={iconClick}
         src={Icon}
@@ -31,14 +31,14 @@ const Navbar = () => {
         className="cursor-pointer"
       />
 
-      <div className="menu-items w-fit mt-5 h-1/6 p-8 backdrop-blur-sm flex justify-evenly items-center rounded-[40px] dark:shadow-[1px_0px_5px_hsl(var(--primary))] shadow-[1px_0px_5px_hsl(var(--primary))]">
+      <div className="menu-items w-fit mt-2 h-1/6 p-8 backdrop-blur-sm flex justify-evenly items-center rounded-[40px] dark:shadow-[1px_0px_5px_hsl(var(--primary))] shadow-[1px_0px_5px_hsl(var(--primary))]">
         <NavigationMenu className="h-2/3 w-full ">
           <NavigationMenuList className="flex space-x-4 ">
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent font-title hover:text-primary">
+              <NavigationMenuTrigger className=" bg-transparent font-title hover:text-primary">
                 Getting Started
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent className="">
                 <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-2">
                     <NavigationMenuLink asChild>
