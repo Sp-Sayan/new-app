@@ -1,6 +1,7 @@
 import User from '../models/user.model.js';
 import generateToken from '../lib/utils.js';
 import bcrypt from 'bcryptjs';
+import cloudinary from '../lib/cloudinary.js';
 
 
 const signup = async (req, res) => {
@@ -93,6 +94,9 @@ const login = async (req, res) => {
 
     catch (error) {
         console.log("Error: ", error);
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
     }
 
 
@@ -111,5 +115,42 @@ const logout = (req, res) => {
     }
 }
 
+const updateProfile = async (req, res) => {
+    try {
+        const { profilePic } = req.body;
+        const userId = req.user._id; //the user added to req in middleware
 
-export { signup, login, logout };
+        if (!profilePic) {
+            return res.status(400).json({
+                message: "Profile Pic Required"
+            })
+        }
+
+        const upload = await cloudinary.uploader.upload(ProfilePic);
+        const updatedUser = await User.findByIdAndUpdate(userId, { profilePic: upload.secure_url }, { new: true });
+
+        res.status(200).json(updatedUser);
+    }
+    catch (error) {
+        console.log("Error: ", error);
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
+}
+
+const checkAuth = (req, res) => {
+    try {
+        res.status(200).json(
+            req.user
+        );
+    } catch (error) {
+        console.log("Error: ", error);
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+}
+
+
+export { signup, login, logout, updateProfile, checkAuth };
