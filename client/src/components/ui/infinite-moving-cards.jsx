@@ -62,7 +62,7 @@ export const InfiniteMovingCards = ({
   return (
     <div
       ref={containerRef}
-      className={cn("scroller relative z-50  min-w-[100%] ", className)}
+      className={cn("scroller relative  min-w-[100%] ", className)}
     >
       <ul
         ref={scrollerRef}
