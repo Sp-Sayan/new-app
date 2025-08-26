@@ -1,18 +1,15 @@
-import Navbar from "@/components/Navbar";
-import React from "react";
+import React from 'react'
 import { MagicCard } from "@/components/magicui/magic-card";
 import { RetroGrid } from "@/components/magicui/retro-grid";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import { ImageUp } from 'lucide-react';
 
-const SignUp = () => {
+const Profile = () => {
   return (
-    <div className="signup-container h-full w-full  flex flex-col  ">
+    <div className="signup-container h-full w-full flex flex-col items-center">
       <RetroGrid />
-      {/* <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div> */}
-      <Navbar />
-      <div className="form-container h-full w-full flex justify-center items-center">
         <MagicCard
-          className=" h-fit w-[30%] flex-col items-center border border-border justify-center whitespace-nowrap text-4xl cursor-default"
+          className=" h-fit mt-4 w-[30%] flex-col items-center border border-border justify-center whitespace-nowrap text-4xl cursor-default"
           gradientColor={
             localStorage.getItem("theme") === "dark" ? "#262626" : "#D9D9D955"
           }
@@ -21,12 +18,24 @@ const SignUp = () => {
             action=""
             class="p-4 flex-col text-[0.5em] gap-4  max-w-sm bg-transparent rounded-x1 w-25 text-foreground flex justify-center items-center min-h-fit"
           >
-            <h1 className="text-[1.5em] mb-6 font-bold text-foreground font-title">
-              Sign Up
+
+
+            <h1 className="text-[1.5em]  font-bold text-foreground font-title">
+              My Profile
             </h1>
+
+            <div class="flex flex-col gap-6 items-center justify-center mt-6">
+              <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-black-500 shadow-lg">
+                <img src="https://via.placeholder.com/150" alt="DP" class="w-full h-full object-cover">
+
+                </img>
+              </div>
+              <ImageUp className='border-1 border-primary cursor-pointer'/>
+            </div>
+
             <input
               type="text"
-              className="border-b p-2 h-[40px] w-full font-body bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
+              className="border-b p-2 h-[40px] mt-2 w-full font-body bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
               placeholder="Username"
             />
 
@@ -37,24 +46,14 @@ const SignUp = () => {
             />
 
             <input
-              type="password"
-              className="border-b p-2 h-[40px] w-full font-body bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
-              placeholder="Password"
+              type="text"
+              className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
+              placeholder="About"
             />
 
-            <input
-              type="password"
-              className="border-b p-2 h-[40px] w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
-              placeholder="Confirm Password"
-            />
-            <p className="font-body">
-              Already Have an Account?{" "}
-              <a href="/login" className="hover:underline font-title">
-                Sign In
-              </a>
-            </p>
+
             <InteractiveHoverButton type="submit" className="group">
-              Sign Up
+              Log Out
             </InteractiveHoverButton>
 
             <div className="flex w-full justify-evenly ">
@@ -90,11 +89,17 @@ const SignUp = () => {
                 </svg>
               </button>
             </div>
+           {/*<label for="dp-upload" class="absolute bottom-1 right-1 bg-white rounded-full p-1 shadow-md cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l3.536-3.536a2 2 0 012.828 0l3.536 3.536a2 2 0 010 2.828L15 18H9v-6z" />
+    </svg>
+  </label>*/}
+          
           </form>
         </MagicCard>
       </div>
-    </div>
-  );
-};
+   
+  )
+}
 
-export default SignUp;
+export default Profile
