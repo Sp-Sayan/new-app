@@ -1,87 +1,168 @@
 import Navbar from "@/components/Navbar";
-import React from "react";
+import React, { useState } from "react";
 import { MagicCard } from "@/components/magicui/magic-card";
 import { RetroGrid } from "@/components/magicui/retro-grid";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "@/store/slices/authSlice";
+import Loader from "@/components/Loader";
 
 const Login = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const loginState = useSelector((state) => state.checkAuth);
+
+  const togglePassword = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginUser({ email, password }));
+    console.log("Form submitted!");
+  };
+
   return (
     <div className="login-container h-full w-full  flex flex-col  ">
       <RetroGrid />
       {/* <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div> */}
       <Navbar />
       <div className="form-container h-full w-full flex justify-center items-center">
-        <MagicCard
-          className=" h-fit w-[30%] flex-col items-center border border-border justify-center whitespace-nowrap text-4xl cursor-default"
-          gradientColor={
-            localStorage.getItem("theme") === "dark" ? "#262626" : "#D9D9D955"
-          }
-        >
-          <form
-            action=""
-            class="p-4 flex-col text-[0.5em] gap-4  max-w-sm bg-transparent rounded-x1 w-25 text-foreground flex justify-center items-center min-h-fit"
-          >
-            <h1 className="text-[1.5em] font-title mb-5 font-bold text-foreground">
-              Login
-            </h1>
+        <div className="flex items-center justify-center p-4">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px] bg-white dark:bg-black px-10 py-14 mt-20 rounded-2xl backdrop-blur-3xl">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Welcome back
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Enter your email below to sign in to your account
+              </p>
+            </div>
 
-            <input
-              type="email"
-              className="border-b p-2 h-[40px] font-body  w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
-              placeholder="Email"
-            />
+            <div className="grid gap-6">
+              <form onSubmit={handleSubmit}>
+                <div className="grid gap-4">
+                  <div className="grid gap-2">
+                    <label
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      htmlFor="email"
+                    >
+                      Email
+                    </label>
+                    <input
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      id="email"
+                      placeholder="name@example.com"
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      type="email"
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="flex items-center">
+                      <label
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>
+                      <a
+                        href="#"
+                        className="ml-auto inline-block text-sm underline text-muted-foreground hover:text-primary"
+                      >
+                        Forgot your password?
+                      </a>
+                    </div>
+                    <div className="relative">
+                      <input
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        type={passwordVisible ? "text" : "password"}
+                      />
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <i
+                          className={`fas ${
+                            passwordVisible ? "fa-eye" : "fa-eye-slash"
+                          } text-muted-foreground cursor-pointer`}
+                          onClick={togglePassword}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                  <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">
+                    {loginState.isLoggingIn ? (
+                      <Loader
+                        size="20"
+                        darkThemeColor="black"
+                        lightThemeColor="white"
+                      />
+                    ) : (
+                      "Sign In"
+                    )}
+                  </button>
+                </div>
+              </form>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-border" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full"
+                >
+                  <svg className="mr-2 h-4 w-4" viewBox="0 0 48 48">
+                    <path
+                      fill="#EA4335"
+                      d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                    ></path>
+                    <path
+                      fill="#4285F4"
+                      d="M46.98 24.55c0-1.57-.15-3.09-.42-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                    ></path>
+                    <path
+                      fill="#FBBC05"
+                      d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                    ></path>
+                    <path
+                      fill="#34A853"
+                      d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                    ></path>
+                    <path fill="none" d="M0 0h48v48H0z"></path>
+                  </svg>
+                  Google
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full"
+                >
+                  <i className="fab fa-github mr-2 h-4 w-4"></i>
+                  GitHub
+                </button>
+              </div>
+            </div>
 
-            <input
-              type="password"
-              className="border-b p-2 h-[40px] font-body w-full bg-transparent placeholder:text-foreground border-foreground border-opacity-38"
-              placeholder="Password"
-            />
-
-            <p className="font-body">
-              New to flixchat?{" "}
-              <a href="/login" className="hover:underline font-title">
+            <p className="px-8 text-center text-sm text-muted-foreground">
+              Don&apos;t have an account?{" "}
+              <a
+                href="/signup"
+                className="underline underline-offset-4 hover:text-primary"
+              >
                 Sign up
               </a>
             </p>
-            <InteractiveHoverButton type="submit" className="font-body">
-              Login
-            </InteractiveHoverButton>
-
-            <div className="flex w-full justify-evenly ">
-              <button className=" w-1/4 hover:bg-primary transition-all duration-300 ease-in-out flex justify-center items-center border   rounded-xl py-2 ">
-                <svg
-                  class="w-6 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M3.06364 7.50914C4.70909 4.24092 8.09084 2 12 2C14.6954 2 16.959 2.99095 18.6909 4.60455L15.8227 7.47274C14.7864 6.48185 13.4681 5.97727 12 5.97727C9.39542 5.97727 7.19084 7.73637 6.40455 10.1C6.2045 10.7 6.09086 11.3409 6.09086 12C6.09086 12.6591 6.2045 13.3 6.40455 13.9C7.19084 16.2636 9.39542 18.0227 12 18.0227C13.3454 18.0227 14.4909 17.6682 15.3864 17.0682C16.4454 16.3591 17.15 15.3 17.3818 14.05H12V10.1818H21.4181C21.5364 10.8363 21.6 11.5182 21.6 12.2273C21.6 15.2727 20.5091 17.8363 18.6181 19.5773C16.9636 21.1046 14.7 22 12 22C8.09084 22 4.70909 19.7591 3.06364 16.4909C2.38638 15.1409 2 13.6136 2 12C2 10.3864 2.38638 8.85911 3.06364 7.50914Z"></path>
-                </svg>
-              </button>
-              <button className=" flex w-1/4 hover:bg-primary duration-300 ease-in-out  border justify-center items-center  bg-opacity-25 rounded-xl py-2 hover ">
-                <svg
-                  class="w-6 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M11.6734 7.22198C10.7974 7.22198 9.44138 6.22598 8.01338 6.26198C6.12938 6.28598 4.40138 7.35397 3.42938 9.04597C1.47338 12.442 2.92538 17.458 4.83338 20.218C5.76938 21.562 6.87338 23.074 8.33738 23.026C9.74138 22.966 10.2694 22.114 11.9734 22.114C13.6654 22.114 14.1454 23.026 15.6334 22.99C17.1454 22.966 18.1054 21.622 19.0294 20.266C20.0974 18.706 20.5414 17.194 20.5654 17.11C20.5294 17.098 17.6254 15.982 17.5894 12.622C17.5654 9.81397 19.8814 8.46998 19.9894 8.40998C18.6694 6.47798 16.6414 6.26198 15.9334 6.21398C14.0854 6.06998 12.5374 7.22198 11.6734 7.22198ZM14.7934 4.38998C15.5734 3.45398 16.0894 2.14598 15.9454 0.849976C14.8294 0.897976 13.4854 1.59398 12.6814 2.52998C11.9614 3.35798 11.3374 4.68998 11.5054 5.96198C12.7414 6.05798 14.0134 5.32598 14.7934 4.38998Z"></path>
-                </svg>
-              </button>
-
-              <button className=" flex w-1/4 border hover:bg-primary transition-all duration-300 justify-center items-center  bg-opacity-25 rounded-xl py-2 hover">
-                <svg
-                  class="w-6 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47062 14 5.5 16 5.5H17.5V2.1401C17.1743 2.09685 15.943 2 14.6429 2C11.9284 2 10 3.65686 10 6.69971V9.5H7V13.5H10V22H14V13.5Z"></path>
-                </svg>
-              </button>
-            </div>
-          </form>
-        </MagicCard>
+          </div>
+        </div>
       </div>
     </div>
   );
