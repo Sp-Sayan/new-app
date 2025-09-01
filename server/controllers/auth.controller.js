@@ -5,7 +5,7 @@ import cloudinary from '../lib/cloudinary.js';
 
 
 const signup = async (req, res) => {
-    const { email, userName, password } = req.body;
+    const { userName, email, password } = req.body;
     try {
         //check password length
         if (password.length < 8) {
@@ -126,7 +126,7 @@ const updateProfile = async (req, res) => {
             })
         }
 
-        const upload = await cloudinary.uploader.upload(ProfilePic);
+        const upload = await cloudinary.uploader.upload(profilePic);
         const updatedUser = await User.findByIdAndUpdate(userId, { profilePic: upload.secure_url }, { new: true });
 
         res.status(200).json(updatedUser);

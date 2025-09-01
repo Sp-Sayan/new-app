@@ -1,50 +1,45 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Settings from "./pages/Settings";
+import Dashboard from "./pages/Dashboard";
 
-
-
-/*import Home from "./pages/Home";
+import Home from "./pages/Home";
 import About from "./pages/About";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-import Profile from "./pages/Profile";*/
-
-
-
-
-
-
-
-
-
-
+import Profile from "./pages/Profile";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    
-
-    
-    /*<div className="flex items-center justify-evenly h-full w-full absolute ">
+    <div className="flex items-center justify-evenly h-full w-full absolute ">
       <BrowserRouter>
-          <Routes>
+        <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="*" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoutes>
+                <Profile />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoutes>
+                <Dashboard />
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
       </BrowserRouter>
-      </div>*/
-
-      
-      
-      <Settings/>
-    
-      
-      
-    
-  
+      <Toaster position="bottom-right" />
+    </div>
   );
 }
 
