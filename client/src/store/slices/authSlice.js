@@ -37,6 +37,28 @@ export const loginUser = createAsyncThunk("user/login", async (data) => {
     }
 })
 
+//api to logout
+export const logoutUser = createAsyncThunk("user/logout", async () => {
+    try {
+        const response = await axiosInstance.get("/auth/logout");
+        toast.success(response.data.message);
+        return response.data;
+    } catch (error) {
+
+    }
+})
+
+//api to update profile
+export const updateProfile = createAsyncThunk("user/updateProfile", async (data) => {
+    try {
+        const response = await axiosInstance.put("/auth/update-profile", data);
+        toast.success("Profile Updated Successfully");
+        return response.data;
+    } catch (error) {
+
+    }
+})
+
 
 
 const initialState = {
@@ -88,6 +110,15 @@ const authSlice = createSlice({
             state.isLoggingIn = false;
             state.authUser = null;
         })
+        //logout
+        builder.addCase(logoutUser.pending, (state, action) => {
+            // add state to show loading spinner if needed
+        })
+        builder.addCase(logoutUser.fulfilled, (state, action) => {
+            state.authUser = null;
+        })
+        //update profile
+        //TODO - update profile logic here
 
     }
 })

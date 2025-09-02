@@ -20,22 +20,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoutes>
-                <Profile />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoutes>
-                <Dashboard />
-              </ProtectedRoutes>
-            }
-          />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
       <Toaster position="bottom-right" />

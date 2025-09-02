@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from "react";
 import { Switch } from "./ui/switch.jsx";
-const ToggleSwitch = () => {
+import { Moon, Sun } from "lucide-react";
+import { cn } from "@/lib/utils.js";
+const ToggleSwitch = ({ className = "" }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
@@ -22,8 +24,8 @@ const ToggleSwitch = () => {
   }, [isDarkMode]);
 
   return (
-    <span>
-      <Switch checked={isDarkMode} onCheckedChange={toggleTheme}></Switch>
+    <span onClick={toggleTheme} className={cn("cursor-pointer", className)}>
+      {isDarkMode ? <Sun /> : <Moon />}
     </span>
   );
 };
