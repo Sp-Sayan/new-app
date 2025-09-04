@@ -146,7 +146,6 @@ const SignUp = () => {
         password: password,
       })
     );
-    console.log("hello");
   };
 
   return (

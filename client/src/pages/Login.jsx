@@ -6,6 +6,7 @@ import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-b
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/store/slices/authSlice";
 import Loader from "@/components/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -14,13 +15,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.checkAuth);
+  const navigate = useNavigate();
 
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
+    await dispatch(loginUser({ email, password }));
+
+    //check when fulfilled
+    if (loginUser.fulfilled) {
+      navigate("/dashboard");
+    }
     console.log("Form submitted!");
   };
 
