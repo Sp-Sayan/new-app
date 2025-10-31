@@ -1,11 +1,22 @@
-import { EllipsisVertical, LogOut, Settings, UserRound } from "lucide-react";
-import React, { useState } from "react";
+import {
+  EllipsisVertical,
+  LogOut,
+  Settings,
+  User,
+  UserRound,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import ToggleSwitch from "../ToggleSwitch";
+import { useDispatch, useSelector } from "react-redux";
+import { getMessages, setSelectedUser } from "@/store/slices/userChatSlice";
 
-const Sidebar = ({ recentChats, selectedChat, onSelectChat }) => {
+const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const dispatch = useDispatch();
+  const selectedChat = useSelector((state) => state.userChat.selectedUser);
+  const allChats = useSelector((state) => state.userChat.users);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -55,17 +66,36 @@ const Sidebar = ({ recentChats, selectedChat, onSelectChat }) => {
         </div>
       </div>
       <div className="font-title">
-        {recentChats.map((chat) => (
+        {allChats.map((chat) => (
           <div
-            key={chat.id}
-            onClick={() => onSelectChat(chat.id)}
-            className={`p-4 cursor-pointer ${
-              selectedChat === chat.id
-                ? "bg-muted"
-                : "hover:bg-muted-foreground hover:text-background"
+            key={chat._id}
+            onClick={() => {
+              //set selected user
+              dispatch(setSelectedUser(chat));
+              //fetch the messages for the selected user
+              dispatch(getMessages(chat._id));
+            }}
+            className={`p-4 cursor-pointer flex items-center gap-5 hover:bg-slate-100 dark:hover:bg-gray-800 dark:focus:bg-gray-800  ${
+              selectedChat?._id === chat._id ? "bg-muted" : ""
             }`}
           >
-            {chat.name}
+            <img
+              className={cn(
+                "rounded-full h-[8vh] aspect-square",
+                chat.profilePic ? "" : "hidden"
+              )}
+              src={chat.profilePic}
+              alt=""
+            />
+            <div
+              className={cn(
+                "defaultUserImage h-[8vh] aspect-square flex items-center justify-center rounded-full bg-muted text-muted-foreground",
+                chat.profilePic ? "hidden" : ""
+              )}
+            >
+              <User />
+            </div>
+            <p className="text-lg">{chat.userName}</p>
           </div>
         ))}
       </div>
