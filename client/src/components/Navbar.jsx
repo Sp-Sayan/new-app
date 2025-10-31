@@ -105,6 +105,13 @@ const Navbar = () => {
                 </a>
               </NavigationMenuLink>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <a href="/settings" className="hover:text-primary font-title">
+                  Settings
+                </a>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>

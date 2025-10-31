@@ -1,11 +1,14 @@
 import ChatWindow from "@/components/ChatWindow/ChatWindow";
 import Messageinput from "@/components/ChatWindow/Messageinput";
 import Sidebar from "@/components/ChatWindow/SideBar";
-import React, { useState } from "react";
+import { getUsers } from "@/store/slices/userChatSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   const [messageInput, setMessageInput] = useState("");
+  const dispatch = useDispatch();
   const [conversations, setConversations] = useState({
     SayanPaul: [
       { sender: "user", text: "Hi", timestamp: "10:00 AM" },
@@ -20,13 +23,17 @@ const Dashboard = () => {
     IshaJha: [{ sender: "IshaJha", text: "Heyy", timestamp: "10:02 AM" }],
   });
 
-  const recentChats = [
-    { id: "SayanPaul", name: "Sayan Paul" },
-    { id: "AarshiMitra", name: "Aarshi Mitra" },
-    { id: "JaneSmith", name: "Jane Smith" },
-    { id: "JohnDoe", name: "John Doe" },
-    { id: "IshaJha", name: "Isha Jha" },
-  ];
+  const allChats = useSelector((state) => state.userChat.users);
+
+  //fetch user for sidebar
+  useEffect(() => {
+    handleFetchAllUsers();
+  }, []);
+
+  const handleFetchAllUsers = async () => {
+    dispatch(getUsers());
+    console.log("response from fetch users: ", allChats);
+  };
 
   const handleSendMessage = () => {
     if (!messageInput.trim()) return;
@@ -50,11 +57,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex h-full w-full">
-      <Sidebar
-        recentChats={recentChats}
-        selectedChat={selectedChat}
-        onSelectChat={setSelectedChat}
-      />
+      <Sidebar />
       <div className="flex flex-col w-full">
         {selectedChat ? (
           <>
@@ -71,8 +74,8 @@ const Dashboard = () => {
           </>
         ) : (
           <div className="w-full h-full flex items-center justify-center flex-1">
-            <p className="text-gray-500 font-extralight text-2xl">
-              Select a chat to start messaging
+            <p className="text-gray-500 font-extralight text-4xl ">
+              Welcome to FlixChat
             </p>
           </div>
         )}

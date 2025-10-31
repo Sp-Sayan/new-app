@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from "./slices/authSlice"
 import themeReducer from "./slices/themeSlice"
+import chatReducer from "./slices/userChatSlice"
 
 export const store = configureStore({
     reducer: {
         checkAuth: authReducer,
-        checkTheme: themeReducer
+        checkTheme: themeReducer,
+        userChat: chatReducer
     },
 })

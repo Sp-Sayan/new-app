@@ -92,7 +92,7 @@ const authSlice = createSlice({
         })
         builder.addCase(signUpUser.fulfilled, (state, action) => {
             state.isSigningUp = false;
-            state.authUser = action.payload;
+            //state.authUser = action.payload;
         })
         builder.addCase(signUpUser.rejected, (state, action) => {
             state.isSigningUp = false;
