@@ -54,7 +54,19 @@ const ChatWindow = () => {
                   : "bg-gray-200 text-black"
               }`}
             >
-              {message.text}
+              {message.image ? (
+                <img
+                  className="h-[50vh] aspect-square rounded-lg"
+                  src={message.image}
+                  alt=""
+                  srcset=""
+                />
+              ) : (
+                ""
+              )}
+              <p className={cn("", message.image ? "text-left" : "")}>
+                {message.text}
+              </p>
             </div>
             <div className="text-xs text-gray-500 mt-1">
               {message.timestamps}

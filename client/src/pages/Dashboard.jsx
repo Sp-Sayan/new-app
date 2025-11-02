@@ -63,11 +63,7 @@ const Dashboard = () => {
         {selectedChat ? (
           <>
             <ChatWindow />
-            <Messageinput
-              messageInput={messageInput}
-              onMessageChange={setMessageInput}
-              onSendMessage={handleSendMessage}
-            />
+            <Messageinput />
           </>
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-5 flex-1">
