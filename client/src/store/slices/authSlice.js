@@ -67,6 +67,7 @@ const initialState = {
     isLoggingIn: false,
     isUpdatingProfile: false,
     isCheckingAuth: true,
+    onlineUsers: []
 }
 
 const authSlice = createSlice({

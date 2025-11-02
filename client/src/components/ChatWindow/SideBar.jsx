@@ -11,12 +11,16 @@ import { cn } from "@/lib/utils";
 import ToggleSwitch from "../ToggleSwitch";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessages, setSelectedUser } from "@/store/slices/userChatSlice";
+import Avatar from "@/assets/avatar.png";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
   const selectedChat = useSelector((state) => state.userChat.selectedUser);
   const allChats = useSelector((state) => state.userChat.users);
+
+  //TODO: fetch online users
+  const onlineUsers = useSelector((state) => state.checkAuth.onlineUsers);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -79,23 +83,26 @@ const Sidebar = () => {
               selectedChat?._id === chat._id ? "bg-muted" : ""
             }`}
           >
-            <img
-              className={cn(
-                "rounded-full h-[8vh] aspect-square",
-                chat.profilePic ? "" : "hidden"
-              )}
-              src={chat.profilePic}
-              alt=""
-            />
-            <div
-              className={cn(
-                "defaultUserImage h-[8vh] aspect-square flex items-center justify-center rounded-full bg-muted text-muted-foreground",
-                chat.profilePic ? "hidden" : ""
-              )}
-            >
-              <User />
+            <div className="image-container relative h-fit w-fit  ">
+              <img
+                className="rounded-full h-[8vh] aspect-square"
+                src={chat.profilePic || Avatar}
+                alt=""
+              />
+              <span
+                className={cn(
+                  "h-2 absolute top-0 right-0 aspect-square rounded-full bg-green-400",
+                  onlineUsers.includes(chat._id) ? "" : "hidden"
+                )}
+              ></span>
             </div>
-            <p className="text-lg">{chat.userName}</p>
+
+            <div className="name-container ">
+              <p className="text-lg">{chat.userName}</p>
+              <p className="text-xs font-body text-muted-foreground">
+                {onlineUsers.includes(chat._id) ? "Online" : "Offline"}
+              </p>
+            </div>
           </div>
         ))}
       </div>

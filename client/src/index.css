@@ -76,6 +76,26 @@
     overflow-y: scroll;
   }
 
+  /* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+   @apply bg-background;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50 cursor-pointer;
+}
+
   
 
   @layer base {
