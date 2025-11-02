@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { RetroGrid } from "@/components/magicui/retro-grid";
 import { updateProfile } from "@/store/slices/authSlice";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const userState = useSelector((state) => state.checkAuth);
@@ -18,7 +19,10 @@ const Profile = () => {
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
 
-    if (!file) return;
+    if (!file || !file.type.startsWith("image/")) {
+      toast.error("Please select an image file");
+      return;
+    }
 
     const reader = new FileReader();
 

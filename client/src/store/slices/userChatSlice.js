@@ -19,12 +19,22 @@ export const getMessages = createAsyncThunk("chat/getMessages", async (userId) =
     }
 })
 
+export const sendMessages = createAsyncThunk("chat/sendMessages", async ({ userId, messages }) => {
+    try {
+        const response = await axiosInstance.post(`/message/send/${userId}`, messages);
+        return response.data;
+    } catch (error) {
+        toast.error("error in sending message");
+    }
+})
+
 const initialState = {
     users: [],
     messages: [],
     selectedUser: null,
     isUsersLoading: false,
-    isMessagesLoading: false
+    isMessagesLoading: false,
+    isSendingMessage: false
 }
 
 const chatSlice = createSlice({
@@ -54,11 +64,25 @@ const chatSlice = createSlice({
             builder.addCase(getMessages.fulfilled, (state, action) => {
                 state.isMessagesLoading = false;
                 state.messages = action.payload;
-                console.log("fetched messages: ", state.messages);
+                //console.log("fetched messages: ", state.messages);
             }),
             builder.addCase(getMessages.rejected, (state, action) => {
                 state.isMessagesLoading = false;
             })
+
+        //send message 
+        builder.addCase(sendMessages.fulfilled, (state, action) => {
+            state.isSendingMessage = false;
+            state.messages.push(action.payload);
+        }),
+            builder.addCase(sendMessages.pending, (state, action) => {
+                state.isSendingMessage = true;
+            }),
+            builder.addCase(sendMessages.rejected, (state, action) => {
+                state.isSendingMessage = false;
+
+            })
+
 
     }
 })

@@ -57,7 +57,8 @@ export default {
 			animation: {
 				scroll: 'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
 				grid: 'grid 15s linear infinite',
-				orbit: 'orbit calc(var(--duration)*1s) linear infinite'
+				orbit: 'orbit calc(var(--duration)*1s) linear infinite',
+				bounce: 'bounce 1.5s ease-in-out infinite',
 			},
 			keyframes: {
 				scroll: {
@@ -79,6 +80,16 @@ export default {
 					},
 					'100%': {
 						transform: 'rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg))'
+					}
+				},
+				bounce: {
+					'0%, 100%': {
+						transform: 'translateY(0)',
+						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)'
+					},
+					'50%': {
+						transform: 'translateY(-25%)',
+						animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
 					}
 				}
 			},

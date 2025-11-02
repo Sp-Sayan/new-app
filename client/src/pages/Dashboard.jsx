@@ -2,11 +2,12 @@ import ChatWindow from "@/components/ChatWindow/ChatWindow";
 import Messageinput from "@/components/ChatWindow/Messageinput";
 import Sidebar from "@/components/ChatWindow/SideBar";
 import { getUsers } from "@/store/slices/userChatSlice";
+import { MessageCircleMoreIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const [selectedChat, setSelectedChat] = useState(null);
+  const selectedChat = useSelector((state) => state.userChat.selectedUser);
   const [messageInput, setMessageInput] = useState("");
   const dispatch = useDispatch();
   const [conversations, setConversations] = useState({
@@ -32,7 +33,7 @@ const Dashboard = () => {
 
   const handleFetchAllUsers = async () => {
     dispatch(getUsers());
-    console.log("response from fetch users: ", allChats);
+    //console.log("response from fetch users: ", allChats);
   };
 
   const handleSendMessage = () => {
@@ -61,20 +62,16 @@ const Dashboard = () => {
       <div className="flex flex-col w-full">
         {selectedChat ? (
           <>
-            <ChatWindow
-              selectedChat={selectedChat}
-              conversations={conversations}
-              recentChats={recentChats}
-            />
-            <Messageinput
-              messageInput={messageInput}
-              onMessageChange={setMessageInput}
-              onSendMessage={handleSendMessage}
-            />
+            <ChatWindow />
+            <Messageinput />
           </>
         ) : (
-          <div className="w-full h-full flex items-center justify-center flex-1">
-            <p className="text-gray-500 font-extralight text-4xl ">
+          <div className="w-full h-full flex flex-col items-center justify-center gap-5 flex-1">
+            <MessageCircleMoreIcon
+              strokeWidth={1}
+              className="text-muted-foreground h-[10vh] w-[20vw] font-extralight animate-bounce"
+            />
+            <p className="text-muted-foreground font-extralight text-4xl ">
               Welcome to FlixChat
             </p>
           </div>
