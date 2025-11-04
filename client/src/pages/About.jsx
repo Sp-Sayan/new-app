@@ -12,7 +12,7 @@ const About = () => {
   };
 
   return (
-    <div className="about-container h-screen w-full bg-transparent  flex flex-col">
+    <div className="about-container h-screen w-full bg-transparent flex flex-col">
       <Navbar />
 
       <div className="about-info mt-[10rem] w-full flex flex-col items-center ">
