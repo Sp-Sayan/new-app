@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { RetroGrid } from "@/components/magicui/retro-grid";
-import   Globe   from "@/components/Globe";
+import Globe from "@/components/Globe";
 
 const Home = () => {
   const data = {
@@ -11,7 +11,7 @@ const Home = () => {
     size: "text-5xl",
   };
   return (
-    <div className="home-container h-full  w-full bg-transparent flex flex-col ">
+    <div className="home-container h-full w-full bg-transparent flex flex-col ">
       <RetroGrid />
       <Navbar />
       <div className="relative  flex h-full w-full flex-col items-center overflow-hidden rounded-lg bg-transparent">
@@ -34,14 +34,11 @@ const Home = () => {
               duration={1.5}
               words={data.sub_heading}
             />
-          
           </div>
         </header>
       </div>
 
-      <section className="features w-full">
-        {/* <Globe/> */}
-      </section>
+      <section className="features w-full">{/* <Globe/> */}</section>
     </div>
   );
 };

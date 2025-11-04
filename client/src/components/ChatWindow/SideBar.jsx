@@ -41,24 +41,24 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-2/5 border-r bg-background">
-      <div className="p-4 font-bold text-lg border-b flex justify-between">
-        <p className="font-title">FlixChat</p>
-        <div className="flex gap-2">
+    <div className=" w-2/5 border-r relative">
+      <div className="p-8 font-bold text-lg border-b flex justify-between">
+        <p className="font-title text-2xl">FlixChat</p>
+        <div className=" flex gap-2">
           <ToggleSwitch />
           <span className="flex flex-col">
             <EllipsisVertical onClick={toggleMenu} className="cursor-pointer" />
             <div
               className={cn(
-                "font-light py-2 border  rounded-2xl bg-background absolute top-[3rem] left-[24rem] transition-all delay-75 shadow-md",
+                "font-extralight font-title min-w-fit py-4 border rounded-2xl bg-black/30 backdrop-blur-xl absolute top-[7vh] right-8 transition-all delay-75 shadow-md",
                 showMenu ? "" : "hidden"
               )}
             >
-              <ul className="w-[7rem] cursor-pointer">
+              <ul className="w-[8rem] cursor-pointer">
                 {menuItems.map((item, index) => (
                   <li
                     key={index}
-                    className="hover:bg-muted w-full pl-2 text-muted-foreground text-[0.8em] flex items-center gap-2"
+                    className="hover:bg-muted w-full pl-2 text-foreground text-[0.8em] flex items-center gap-2"
                   >
                     {item.icon}
                     <a href={item.href}>{item.label}</a>
@@ -79,8 +79,8 @@ const Sidebar = () => {
               //fetch the messages for the selected user
               dispatch(getMessages(chat._id));
             }}
-            className={`p-4 cursor-pointer flex items-center gap-5 hover:bg-slate-100 dark:hover:bg-gray-800 dark:focus:bg-gray-800  ${
-              selectedChat?._id === chat._id ? "bg-muted" : ""
+            className={`p-4 cursor-pointer flex items-center gap-5 hover:bg-slate-100 dark:hover:bg-black/30   ${
+              selectedChat?._id === chat._id ? "bg-black/30" : ""
             }`}
           >
             <div className="image-container relative h-fit w-fit  ">

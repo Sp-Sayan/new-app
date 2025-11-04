@@ -54,7 +54,7 @@ const Messageinput = () => {
   };
 
   return (
-    <div className="p-4 border-t bg-background">
+    <div className="p-4 border-t">
       <div className={cn("w-full h-fit py-2 ", imagePreview ? "" : "hidden")}>
         <div className="preview-image-container h-[12vh] aspect-square  relative ">
           <img
@@ -72,7 +72,7 @@ const Messageinput = () => {
         <textarea
           ref={messageRef}
           type="text"
-          className="flex-auto border bg-background outline-none rounded-lg px-4 py-2 resize-none"
+          className="flex-auto border bg-background/40 outline-none rounded-lg px-4 py-2 resize-none"
           placeholder="Type your message...."
         />
         <label htmlFor="image-upload">
