@@ -12,18 +12,27 @@ import ToggleSwitch from "../ToggleSwitch";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessages, setSelectedUser } from "@/store/slices/userChatSlice";
 import Avatar from "@/assets/avatar.png";
+import { logoutUser } from "@/store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
   const selectedChat = useSelector((state) => state.userChat.selectedUser);
   const allChats = useSelector((state) => state.userChat.users);
+  const isLoggedOut = useSelector((state) => state.checkAuth.isLoggedOut);
+  const navigate = useNavigate();
 
   //TODO: fetch online users
   const onlineUsers = useSelector((state) => state.checkAuth.onlineUsers);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const handleLogout = async () => {
+    await dispatch(logoutUser());
+    if (isLoggedOut) navigate("/login");
   };
 
   const menuItems = [
@@ -37,7 +46,11 @@ const Sidebar = () => {
       label: "Settings",
       href: "/settings",
     },
-    { icon: <LogOut className="w-5 h-5" />, label: "Log Out", href: "/logout" },
+    {
+      icon: <LogOut className="w-5 h-5" />,
+      label: "Log Out",
+      href: "/login",
+    },
   ];
 
   return (
@@ -61,7 +74,13 @@ const Sidebar = () => {
                     className="hover:bg-muted w-full pl-2 text-foreground text-[0.8em] flex items-center gap-2"
                   >
                     {item.icon}
-                    <a href={item.href}>{item.label}</a>
+
+                    {index === menuItems.length - 1 ? (
+                      //for logout option
+                      <span onClick={handleLogout}>{item.label}</span>
+                    ) : (
+                      <a href={item.href}>{item.label}</a>
+                    )}
                   </li>
                 ))}
               </ul>

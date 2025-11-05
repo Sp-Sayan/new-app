@@ -136,7 +136,7 @@ const ChatWindow = () => {
                 {message.text}
               </p>
 
-              <div
+              <time
                 className={cn(
                   "text-xs mt-1",
                   message.senderId === currentLoggedInUser._id
@@ -145,7 +145,7 @@ const ChatWindow = () => {
                 )}
               >
                 {parseTime(message.updatedAt)}
-              </div>
+              </time>
             </div>
           </div>
         ))}

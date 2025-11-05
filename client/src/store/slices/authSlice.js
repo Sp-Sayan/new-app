@@ -41,7 +41,6 @@ export const loginUser = createAsyncThunk("user/login", async (data) => {
 export const logoutUser = createAsyncThunk("user/logout", async () => {
     try {
         const response = await axiosInstance.get("/auth/logout");
-        toast.success(response.data.message);
         return response.data;
     } catch (error) {
 
@@ -65,6 +64,7 @@ const initialState = {
     authUser: null,
     isSigningUp: false,
     isLoggingIn: false,
+    isLoggedOut: true,
     isUpdatingProfile: false,
     isCheckingAuth: true,
     onlineUsers: []
@@ -75,6 +75,8 @@ const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+
+        //check authentication
         builder.addCase(checkAuth.pending, (state, action) => {
             state.isCheckingAuth = true;
         }),
@@ -105,6 +107,7 @@ const authSlice = createSlice({
         })
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.isLoggingIn = false;
+            state.isLoggedOut = false;
             state.authUser = action.payload;
         })
         builder.addCase(loginUser.rejected, (state, action) => {
@@ -117,6 +120,8 @@ const authSlice = createSlice({
         })
         builder.addCase(logoutUser.fulfilled, (state, action) => {
             state.authUser = null;
+            state.isLoggedOut = true;
+            toast.success(action.payload.message);
         })
         //update profile
         //TODO - update profile logic here
