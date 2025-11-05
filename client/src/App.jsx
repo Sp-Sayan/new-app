@@ -10,6 +10,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
 import ThemeProvider from "./components/ThemeProvider";
 import ToggleSwitch from "./components/ToggleSwitch";
+import PublicRoutes from "./components/PublicRoutes";
 
 function App() {
   return (
@@ -19,10 +20,38 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="*" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/home"
+              element={
+                <PublicRoutes>
+                  <Home />
+                </PublicRoutes>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PublicRoutes>
+                  <About />
+                </PublicRoutes>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <PublicRoutes>
+                  <SignUp />
+                </PublicRoutes>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoutes>
+                  <Login />
+                </PublicRoutes>
+              }
+            />
             <Route
               path="/profile"
               element={

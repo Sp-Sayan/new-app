@@ -6,9 +6,10 @@ import aiRoutes from '../routes/ai.routes.js';
 import connectDB from '../lib/db.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import { app, server } from '../lib/socket.js';
 
 dotenv.config();
-const app = express();
+
 const port = process.env.PORT || 3000;
 
 app.use(express.json({
@@ -29,7 +30,7 @@ app.use("/api/message", messageRoutes);
 app.use("/api/ai", aiRoutes);
 
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running in port ${port}`);
     connectDB();
 })
